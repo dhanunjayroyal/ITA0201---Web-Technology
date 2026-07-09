@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guru Dhanunjay | Student Profile – Saveetha University</title>
+    <meta name="description" content="Student profile of Guru Dhanunjay from Saveetha University – academics, hobbies, goals and contact." />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* ── Design Tokens ── */
+        :root {
+            --clr-bg:        #0d0f1a;
+            --clr-surface:   #13162b;
+            --clr-card:      rgba(255,255,255,0.05);
+            --clr-border:    rgba(255,255,255,0.08);
+            --clr-accent1:   #7c3aed;
+            --clr-accent2:   #06b6d4;
+            --clr-accent3:   #f59e0b;
+            --clr-text:      #e2e8f0;
+            --clr-muted:     #94a3b8;
+            --radius:        16px;
+            --shadow:        0 8px 32px rgba(0,0,0,0.45);
+            --transition:    0.3s ease;
+        }
+
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--clr-bg);
+            color: var(--clr-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ── Animated Background ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 10%, rgba(124,58,237,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(6,182,212,0.14) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── Layout ── */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── Hero / Header ── */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 3.5rem 2rem 2.5rem;
+            background: var(--clr-card);
+            backdrop-filter: blur(18px);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            animation: fadeDown 0.8s ease both;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(var(--clr-accent1), var(--clr-accent2), var(--clr-accent3), var(--clr-accent1));
+            animation: spin 4s linear infinite;
+        }
+
+        .avatar-wrapper img {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--clr-bg);
+        }
+
+        /* ── Section Badge ── */
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--clr-accent1), var(--clr-accent2));
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            margin-bottom: 0.6rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 30%, var(--clr-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .university {
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+            color: var(--clr-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .university span { color: var(--clr-accent3); font-weight: 600; }
+
+        /* ── Cards ── */
+        .card {
+            background: var(--clr-card);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            padding: 1.8rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform var(--transition), box-shadow var(--transition);
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.55);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .section-title .icon {
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            display: grid; place-items: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .icon-purple { background: rgba(124,58,237,0.25); color: #a78bfa; }
+        .icon-cyan   { background: rgba(6,182,212,0.2);  color: #67e8f9; }
+        .icon-amber  { background: rgba(245,158,11,0.2); color: #fcd34d; }
+        .icon-green  { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+        .icon-pink   { background: rgba(236,72,153,0.2); color: #f9a8d4; }
+        .icon-blue   { background: rgba(59,130,246,0.2); color: #93c5fd; }
+
+        /* ── Intro text ── */
+        .intro-text { color: var(--clr-muted); font-size: 1.02rem; }
+
+        /* ── Lists ── */
+        .hobby-list, .goal-list { padding-left: 0; list-style: none; }
+
+        .hobby-list li {
+            display: flex; align-items: center; gap: 0.7rem;
+            padding: 0.55rem 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 0.4rem;
+            background: rgba(255,255,255,0.03);
+            transition: background var(--transition);
+            color: var(--clr-muted);
+        }
+        .hobby-list li:hover { background: rgba(124,58,237,0.15); color: #fff; }
+        .hobby-list li::before { content: '◆'; color: var(--clr-accent1); font-size: 0.65rem; }
+
+        .goal-list { counter-reset: goal; }
+        .goal-list li {
+            display: flex; align-items: flex-start; gap: 0.9rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            background: rgba(255,255,255,0.03);
+            color: var(--clr-muted);
+            transition: background var(--transition);
+        }
+        .goal-list li:hover { background: rgba(6,182,212,0.12); color: #fff; }
+        .goal-list li::before {
+            counter-increment: goal;
+            content: counter(goal);
+            min-width: 28px; height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--clr-accent1), var(--clr-accent2));
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: grid; place-items: center;
+            flex-shrink: 0;
+        }
+
+        /* ── Marks Table ── */
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .marks-table thead tr {
+            background: linear-gradient(135deg, rgba(124,58,237,0.35), rgba(6,182,212,0.25));
+        }
+
+        .marks-table th {
+            padding: 0.85rem 1.1rem;
+            text-align: left;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.04em;
+            font-size: 0.88rem;
+            text-transform: uppercase;
+        }
+
+        .marks-table td {
+            padding: 0.75rem 1.1rem;
+            color: var(--clr-muted);
+            border-bottom: 1px solid var(--clr-border);
+            transition: background var(--transition);
+        }
+
+        .marks-table tbody tr:hover td {
+            background: rgba(255,255,255,0.04);
+            color: var(--clr-text);
+        }
+
+        .marks-table td:last-child { font-weight: 700; }
+
+        .grade {
+            display: inline-block;
+            padding: 0.15rem 0.65rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+        .grade-s  { background: rgba(16,185,129,0.2);  color: #6ee7b7; }
+        .grade-a  { background: rgba(6,182,212,0.2);   color: #67e8f9; }
+        .grade-b  { background: rgba(245,158,11,0.2);  color: #fcd34d; }
+
+        /* ── Progress bar ── */
+        .progress-bar-wrap {
+            width: 90px; height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 99px; overflow: hidden;
+            display: inline-block; vertical-align: middle; margin-left: 8px;
+        }
+        .progress-bar {
+            height: 100%; border-radius: 99px;
+            background: linear-gradient(90deg, var(--clr-accent1), var(--clr-accent2));
+            transition: width 1.4s ease;
+        }
+
+        /* ── Hyperlink ── */
+        .college-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--clr-accent1), var(--clr-accent2));
+            color: #fff;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform var(--transition), box-shadow var(--transition);
+            box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+        }
+        .college-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(124,58,237,0.55);
+        }
+
+        /* ── Contact Grid ── */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--clr-border);
+            border-radius: 12px;
+            transition: background var(--transition);
+        }
+        .contact-item:hover { background: rgba(124,58,237,0.15); }
+        .contact-item .ci-icon {
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            display: grid; place-items: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .contact-item .ci-label { font-size: 0.75rem; color: var(--clr-muted); }
+        .contact-item .ci-value { font-size: 0.95rem; color: var(--clr-text); font-weight: 600; word-break: break-all; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--clr-muted);
+            font-size: 0.85rem;
+            position: relative; z-index: 1;
+        }
+
+        /* ── Animations ── */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .card { padding: 1.2rem 1rem; }
+            .marks-table th, .marks-table td { padding: 0.6rem 0.6rem; font-size: 0.82rem; }
+            .progress-bar-wrap { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ══ HERO ══ -->
+    <header class="hero" id="hero">
+        <div class="avatar-wrapper">
+            <div class="avatar-ring"></div>
+            <img
+                src="profile.jpg"
+                alt="Photo of Guru Dhanunjay"
+                id="profile-photo"
+            />
+        </div>
+        <div class="badge">Student Profile</div>
+        <h1 id="student-name">Guru Dhanunjay</h1>
+        <p class="university">
+            <span>Saveetha University</span> &nbsp;·&nbsp; B.Tech – Information Technology
+        </p>
+    </header>
+
+    <!-- ══ ABOUT ══ -->
+    <section class="card" id="about" aria-labelledby="about-title">
+        <h2 class="section-title" id="about-title">
+            <span class="icon icon-purple">👤</span> About Me
+        </h2>
+        <p class="intro-text">
+            Hello! I'm <strong>Guru Dhanunjay</strong>, a passionate and driven Information Technology 
+            student at <strong>Saveetha University</strong>. I have a deep interest in 
+            software development, artificial intelligence, and building innovative digital solutions 
+            that solve real-world problems. I believe in continuous learning and aim to bridge 
+            the gap between technology and creativity. Beyond academics, I enjoy exploring new tech 
+            stacks, contributing to open-source projects, and collaborating with like-minded peers 
+            to build impactful products.
+        </p>
+    </section>
+
+    <!-- ══ HOBBIES ══ -->
+    <section class="card" id="hobbies" aria-labelledby="hobbies-title">
+        <h2 class="section-title" id="hobbies-title">
+            <span class="icon icon-cyan">🎯</span> Hobbies
+        </h2>
+        <ul class="hobby-list" id="hobby-list">
+            <li>Competitive Programming &amp; Coding Challenges</li>
+            <li>Web Development &amp; UI/UX Design</li>
+            <li>Reading Tech Blogs &amp; Research Papers</li>
+            <li>Playing Chess</li>
+            <li>Photography &amp; Video Editing</li>
+            <li>Watching Cricket</li>
+        </ul>
+    </section>
+
+    <!-- ══ ACADEMIC GOALS ══ -->
+    <section class="card" id="goals" aria-labelledby="goals-title">
+        <h2 class="section-title" id="goals-title">
+            <span class="icon icon-amber">🎓</span> Academic Goals
+        </h2>
+        <ol class="goal-list" id="goal-list">
+            <li>Maintain a CGPA above 9.0 throughout my B.Tech programme.</li>
+            <li>Complete industry-recognised certifications in Full Stack Development and Cloud Computing.</li>
+            <li>Contribute to at least two open-source projects by the end of my second year.</li>
+            <li>Secure a Research Internship at a leading technology organisation.</li>
+            <li>Publish a paper in an IEEE/Springer indexed conference before graduation.</li>
+            <li>Build and launch a real-world SaaS product during the final year project.</li>
+        </ol>
+    </section>
+
+    <!-- ══ SUBJECT MARKS ══ -->
+    <section class="card" id="marks" aria-labelledby="marks-title">
+        <h2 class="section-title" id="marks-title">
+            <span class="icon icon-green">📊</span> Subject Marks
+        </h2>
+        <table class="marks-table" id="marks-table">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Max Marks</th>
+                    <th>Scored</th>
+                    <th>Grade</th>
+                    <th>Progress</th>
+                </tr>
+            </thead>
+            <tbody id="marks-body">
+                <tr>
+                    <td>Web Technologies</td>
+                    <td>100</td>
+                    <td>94</td>
+                    <td><span class="grade grade-s">S</span></td>
+                    <td><span class="progress-bar-wrap"><span class="progress-bar" data-w="94"></span></span></td>
+                </tr>
+                <tr>
+                    <td>Data Structures &amp; Algorithms</td>
+                    <td>100</td>
+                    <td>91</td>
+                    <td><span class="grade grade-s">S</span></td>
+                    <td><span class="progress-bar-wrap"><span class="progress-bar" data-w="91"></span></span></td>
+                </tr>
+                <tr>
+                    <td>Database Management Systems</td>
+                    <td>100</td>
+                    <td>88</td>
+                    <td><span class="grade grade-a">A</span></td>
+                    <td><span class="progress-bar-wrap"><span class="progress-bar" data-w="88"></span></span></td>
+                </tr>
+                <tr>
+                    <td>Operating Systems</td>
+                    <td>100</td>
+                    <td>85</td>
+                    <td><span class="grade grade-a">A</span></td>
+                    <td><span class="progress-bar-wrap"><span class="progress-bar" data-w="85"></span></span></td>
+                </tr>
+                <tr>
+                    <td>Computer Networks</td>
+                    <td>100</td>
+                    <td>90</td>
+                    <td><span class="grade grade-s">S</span></td>
+                    <td><span class="progress-bar-wrap"><span class="progress-bar" data-w="90"></span></span></td>
+                </tr>
+                <tr>
+                    <td>Artificial Intelligence</td>
+                    <td>100</td>
+                    <td>93</td>
+                    <td><span class="grade grade-s">S</span></td>
+                    <td><span class="progress-bar-wrap"><span class="progress-bar" data-w="93"></span></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- ══ COLLEGE LINK ══ -->
+    <section class="card" id="college-section" aria-labelledby="college-title">
+        <h2 class="section-title" id="college-title">
+            <span class="icon icon-blue">🏛️</span> My College
+        </h2>
+        <p style="color:var(--clr-muted); margin-bottom:1.2rem;">
+            Saveetha University is a premier institution known for excellence in engineering, 
+            medical sciences, and research. Visit the official website to learn more.
+        </p>
+        <a
+            href="https://www.saveetha.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="college-link"
+            id="college-link"
+        >
+            🌐 &nbsp;Visit Saveetha University
+        </a>
+    </section>
+
+    <!-- ══ CONTACT ══ -->
+    <section class="card" id="contact" aria-labelledby="contact-title">
+        <h2 class="section-title" id="contact-title">
+            <span class="icon icon-pink">📬</span> Contact Details
+        </h2>
+        <div class="contact-grid" id="contact-grid">
+            <div class="contact-item">
+                <div class="ci-icon icon-purple">📧</div>
+                <div>
+                    <div class="ci-label">Email</div>
+                    <div class="ci-value">gurudhanunjay@saveetha.com</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon icon-cyan">📱</div>
+                <div>
+                    <div class="ci-label">Phone</div>
+                    <div class="ci-value">+91 98765 43210</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon icon-green">🏫</div>
+                <div>
+                    <div class="ci-label">College</div>
+                    <div class="ci-value">Saveetha University</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon icon-amber">📍</div>
+                <div>
+                    <div class="ci-label">Location</div>
+                    <div class="ci-value">Chennai, Tamil Nadu</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon icon-blue">💼</div>
+                <div>
+                    <div class="ci-label">LinkedIn</div>
+                    <div class="ci-value">linkedin.com/in/gurudhanunjay</div>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="ci-icon icon-pink">🐙</div>
+                <div>
+                    <div class="ci-label">GitHub</div>
+                    <div class="ci-value">github.com/gurudhanunjay</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div><!-- /container -->
+
+<footer>
+    <p>© 2026 <strong>Guru Dhanunjay</strong> · Saveetha University · Made with HTML, CSS &amp; JavaScript</p>
+</footer>
+
+<!-- ══ JAVASCRIPT ══ -->
+<script>
+    /* Animate progress bars on scroll */
+    const bars = document.querySelectorAll('.progress-bar');
+
+    function animateBars() {
+        bars.forEach(bar => {
+            const rect = bar.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 40) {
+                bar.style.width = bar.dataset.w + '%';
+            }
+        });
+    }
+
+    /* Start all bars at 0 */
+    bars.forEach(bar => { bar.style.width = '0%'; });
+
+    window.addEventListener('scroll', animateBars);
+    window.addEventListener('load',   animateBars);
+
+    /* Typewriter effect on student name */
+    const nameEl  = document.getElementById('student-name');
+    const fullName = 'Guru Dhanunjay';
+    nameEl.textContent = '';
+
+    let i = 0;
+    function typeWriter() {
+        if (i < fullName.length) {
+            nameEl.textContent += fullName[i++];
+            setTimeout(typeWriter, 90);
+        }
+    }
+    setTimeout(typeWriter, 600);
+
+    /* Highlight table row on click */
+    document.querySelectorAll('#marks-body tr').forEach(row => {
+        row.addEventListener('click', () => {
+            document.querySelectorAll('#marks-body tr').forEach(r => r.style.background = '');
+            row.style.background = 'rgba(124,58,237,0.18)';
+        });
+    });
+
+    /* Staggered card reveal on load */
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, idx) => {
+        card.style.opacity = '0';
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            card.style.opacity    = '1';
+            card.style.transform  = 'translateY(0)';
+        }, 200 + idx * 120);
+    });
+</script>
+
+</body>
+</html>
